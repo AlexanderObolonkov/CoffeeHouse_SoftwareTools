@@ -9,6 +9,7 @@ packages = [{include = "coffeehouse_softwaretools"}]
 [tool.poetry.dependencies]
 python = "^3.10"
 python-dotenv = "^1.0.0"
+django = "^4.1.7"
 
 
 [build-system]
