@@ -1,0 +1,16 @@
+[tool.poetry]
+name = "coffeehouse-softwaretools"
+version = "0.1.0"
+description = ""
+authors = ["Alexandr Obolonkov <itbolonkov2019@gmail.com>"]
+readme = "README.md"
+packages = [{include = "coffeehouse_softwaretools"}]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+python-dotenv = "^1.0.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
