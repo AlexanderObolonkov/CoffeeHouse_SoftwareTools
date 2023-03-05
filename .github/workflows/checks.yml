@@ -29,7 +29,7 @@ jobs:
         run: poetry lock --check
 
       - name: Install dependencies
-        run: poetry install
+        run: poetry install --no-root
 
       - name: Run flake8
         run: flake8 .
