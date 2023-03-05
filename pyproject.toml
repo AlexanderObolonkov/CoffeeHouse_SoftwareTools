@@ -10,7 +10,13 @@ packages = [{include = "coffeehouse_softwaretools"}]
 python = "^3.10"
 python-dotenv = "^1.0.0"
 django = "^4.1.7"
+django-stubs = "^1.15.0"
 
+[tool.poetry.group.dev.dependencies]
+flake8 = "^6.0.0"
+flake8-bugbear = "^23.2.13"
+pep8-naming = "^0.13.3"
+mypy = "^1.0.1"
 
 [build-system]
 requires = ["poetry-core"]
