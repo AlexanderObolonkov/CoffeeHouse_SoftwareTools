@@ -3,6 +3,7 @@ from decimal import Decimal
 from django.db import models
 from django.core.validators import MinValueValidator
 
+
 class Position(models.Model):
     title = models.CharField(max_length=200)
     url = models.SlugField()
