@@ -38,7 +38,7 @@ class ContactsView(View):
             subject = form.cleaned_data['subject']
             message = form.cleaned_data['message']
             try:
-                send_mail(f'От {name} | {from_email} |{subject}', message, from_email, [getenv('MAIN_EMAIL')])
+                send_mail(f'От {name} | {from_email} | {subject}', message, from_email, [getenv('MAIN_EMAIL')])
             except BadHeaderError:
                 return HttpResponse('Невалидный заголовок')
             return HttpResponseRedirect('success')
