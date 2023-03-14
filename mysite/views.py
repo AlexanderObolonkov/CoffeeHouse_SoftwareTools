@@ -14,3 +14,14 @@ class MainView(View):
                 'nav_bar': 'index'
             }
         )
+
+
+class ContactsView(View):
+    def get(self, request, *args, **kwargs):
+        return render(
+            request,
+            'mysite/contacts.html',
+            context={
+                'nav-bar': 'contacts'
+            }
+        )

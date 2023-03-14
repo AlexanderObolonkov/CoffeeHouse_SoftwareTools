@@ -81,9 +81,10 @@
                                 <div class="product-bottom-delails d-flex justify-content-between">
                                     <div class="product-price">
                                         {% if position.is_with_discount %}
-                                            <small>{{ position.price }} руб.</small>p {{ position.default_discount}} руб.
+                                            <small>{{ position.price|floatformat:2 }} руб.</small>p {{ position.default_discount|floatformat:2 }}
+                                            руб.
                                         {% else %}
-                                            {{ position.price}} руб.
+                                            {{ position.price|floatformat:2 }} руб.
                                         {% endif %}
                                     </div>
                                     <div class="product-links">

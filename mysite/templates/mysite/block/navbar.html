@@ -1,9 +1,10 @@
 {% load static %}
 <nav class="navbar navbar-expand-lg ">
     <div class="container-fluid">
-        <a class="navbar-brand" href="#">
+        <a class="navbar-brand" href="{% url 'index' %}">
             Coffee House
-            <img src="{% static 'img/logo.svg' %}" width="50" height="50" class="d-inline-block align-text-bottom" alt="logo">
+            <img src="{% static 'img/logo.svg' %}" width="50" height="50" class="d-inline-block align-text-bottom"
+                 alt="logo">
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -12,7 +13,7 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav ms-auto mb-2 mb-lg-0 top-menu">
                 <li class="nav-item">
-                    <a class="nav-link {% if nav_bar == 'index' %}active{% endif %}" href="#">Главная</a>
+                    <a class="nav-link {% if nav_bar == 'index' %}active{% endif %}" href="{% url 'index' %}">Главная</a>
                 </li>
 
                 <li class="nav-item">
@@ -31,10 +32,10 @@
                                 <table class="table">
                                     <thead>
                                     <tr>
-                                        <th scope="col">Изображение</th>
+                                        <th scope="col">Фото</th>
                                         <th scope="col">Позиция</th>
-                                        <th scope="col">Опции</th>
-                                        <th scope="col">Цена</th>
+                                        <th scope="col">Шт.</th>
+                                        <th scope="col">Стоимость</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -42,22 +43,31 @@
                                     <tr>
                                         <td>...</td>
                                         <td>...</td>
-                                        <td>...</td>
+                                        <td>
+                                            <div class="select-amount">
+                                                <select class="form-select" aria-label="Шт.">
+                                                    <option selected value="1">1 шт.</option>
+                                                    <option value="2">2 шт.</option>
+                                                    <option value="3">3 шт.</option>
+                                                </select>
+                                            </div>
+                                        </td>
                                         <td>...</td>
                                     </tr>
                                     </tbody>
                                 </table>
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
+                                <h3>Итого: ... руб.</h3>
                                 <button type="button" class="btn btn-primary">Перейти к оформлению заказа</button>
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
                             </div>
                         </div>
                     </div>
                 </div>
 
                 <li class="nav-item">
-                    <a class="nav-link {% if nav_bar == 'contacts' %}active{% endif %}" href="#">Контакты</a>
+                    <a class="nav-link {% if nav_bar == 'contacts' %}active{% endif %}" href="{% url 'contacts' %}">Контакты</a>
                 </li>
                 <!-- <li class="nav-item">
                   <a class="nav-link" href="#">Отзывы</a> и т.д. можно добавлять
