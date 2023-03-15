@@ -1,14 +1,15 @@
-from os import getenv
-from .models import Position
-from .forms import FeedBackForm
+from os import getenv  # Кирилл
+from .models import Position  # Александр
+from .forms import FeedBackForm  # Кирилл
 
-from django.shortcuts import render
-from django.views import View
-from django.http import HttpResponse, HttpResponseRedirect
-from django.core.mail import send_mail, BadHeaderError
+from django.shortcuts import render  # Александр
+from django.views import View  # Александр
+from django.http import HttpResponse, HttpResponseRedirect  # Кирилл
+from django.core.mail import send_mail, BadHeaderError  # Кирилл
 
 
 class MainView(View):
+    """Александр"""
     def get(self, request, *args, **kwargs):
         positions = Position.objects.all()
         return render(
@@ -22,6 +23,7 @@ class MainView(View):
 
 
 class ContactsView(View):
+    """Кирилл"""
     def get(self, request, *args, **kwargs):
         form = FeedBackForm()
         return render(request, 'mysite/contacts.html', context={
