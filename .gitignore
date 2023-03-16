@@ -6,6 +6,8 @@
 __pycache__/
 venv/
 .mypy_cache/
+static/admin/
 tips.md
 db.sqlite3
 .env
+db.json
