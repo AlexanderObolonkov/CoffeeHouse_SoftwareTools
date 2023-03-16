@@ -16,3 +16,11 @@ class MainView(View):
                 'nav_bar': 'index'
             }
         )
+
+
+class ContactsView(View):
+    ...
+
+
+class SuccessView(View):
+    ...
