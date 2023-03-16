@@ -4,4 +4,40 @@
 {% block title %}COFFEE HOUSE{% endblock %}
 
 {% block page_content %}
+    <section class="products-content">
+        <div class="container">
+            <h1 class="text-uppercase text-center">Menu</h1>
+            <div class="row">
+                {% for position in positions %}
+                    <div class="col-lg-4 col-sm-6 mb-3">
+                        <div class="product-card">
+                            <div class="product-thumb">
+                                <a href="#"><img src="media/{{ position.image }}" alt="Позиция"></a>
+                            </div>
+                            <div class="product-details">
+                                <h2><a href="#">{{ position.title }}</a></h2>
+                                <p>{{ position.description|safe }}</p>
+                            </div>
+                            <div class="product-bottom-delails d-flex justify-content-between">
+                                <div class="product-price">
+                                    {% if position.is_with_discount %}
+                                        <small>{{ position.price|floatformat:2 }} руб.</small>p
+                                        {{ position.default_discount|floatformat:2 }}
+                                        руб.
+                                    {% else %}
+                                        {{ position.price|floatformat:2 }} руб.
+                                    {% endif %}
+                                </div>
+                                <div class="product-links">
+                                    <a href="#">В корзину</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+
+    </div>
 {% endblock %}
