@@ -1,0 +1,17 @@
+<!--Кирилл-->
+{% extends './base.html' %}
+{% load static %}
+
+{% block title %}Спасибо!{% endblock %}
+
+{% block page_content %}
+    <section class="contacts-content">
+        <div class="container">
+            <div class="img-wrap">
+                <img src="{% static 'img/success.jpg' %}" alt="success">
+                <h1 class="text-center">Ваше письмо отправлено. Спасибо!</h1>
+            </div>
+        </div>
+    </section>
+{% endblock %}
+<!--Кирилл-->
