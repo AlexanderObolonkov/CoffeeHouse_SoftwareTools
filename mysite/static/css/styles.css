@@ -189,4 +189,8 @@ footer li a {
     width: 100%;
     color: #ffffff;
 }
+
+#success-img {
+    max-height: 500px;
+}
 /* Success page content */
