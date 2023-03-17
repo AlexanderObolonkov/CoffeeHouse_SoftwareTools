@@ -2,7 +2,7 @@
 
 [![Build status](https://github.com/AlexanderObolonkov/CoffeeHouse_SoftwareTools/actions/workflows/checks.yml/badge.svg?branch=main)](https://github.com/AlexanderObolonkov/CoffeeHouse_SoftwareTools/actions/workflows/checks.yml)
 
-[![alt text](coffehouse-logo.svg)](https://raw.githubusercontent.com/AlexanderObolonkov/CoffeeHouse_SoftwareTools/c7677626082125fc5ccaf99bb5bffded88b37b5d/mysite/static/img/logo.svg)
+<img src="https://raw.githubusercontent.com/AlexanderObolonkov/CoffeeHouse_SoftwareTools/c7677626082125fc5ccaf99bb5bffded88b37b5d/mysite/static/img/logo.svg" alt="logo" width="200">
 
 Django coffee site
 
