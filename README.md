@@ -36,7 +36,7 @@ To manage dependencies, use [Poetry](https://python-poetry.org/), Python 3.10 re
 
 4) Run project dependencies, migrations, fill the database with the fixture data etc.:
     ```bash
-    pyhon manage.py manage.py migrate
+    python manage.py manage.py migrate
     python manage.py loaddata <path_to_fixture_files>
     python manage.py collectstatic
     python manage.py runserver
