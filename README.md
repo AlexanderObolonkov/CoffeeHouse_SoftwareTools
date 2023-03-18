@@ -40,7 +40,7 @@ To manage dependencies, use [Poetry](https://python-poetry.org/), Python 3.10 re
     python manage.py loaddata <path_to_fixture_files>
     python manage.py collectstatic
     python manage.py runserver
-    
+    ```   
 ## Developers
 - Obolonkov Alexander
   Username: AlexanderObolonkov
@@ -48,5 +48,3 @@ To manage dependencies, use [Poetry](https://python-poetry.org/), Python 3.10 re
   Username: GovardFilipsovich
 - Veselov Anton
   kartofanChick22
-   
-    ```
