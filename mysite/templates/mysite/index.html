@@ -14,9 +14,17 @@
     <form action="{% url 'index' %}" method="post">
         {% csrf_token %}
         <p><textarea rows="2" cols="50" name="QUEST" placeholder="Your question"></textarea></p>
-        <p><input type="text" size="50" placeholder="Your email"></p>
+        <p><input type="text" size="50" name="ADDRESS" placeholder="Your email"></p>
+        <p><input type="text" size="25" name="NAME" placeholder="Your name"></p>
         <p><input type="submit" class="btn btn-primary" value="Send"></p>
     </form>
+    {% if errors %}
+        {% for error in errors %}
+            <div class="alert alert-danger">
+                <strong>{{ error|escape }}</strong>
+            </div>
+        {% endfor %}
+    {% endif %}
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
 </body>
 </html>
