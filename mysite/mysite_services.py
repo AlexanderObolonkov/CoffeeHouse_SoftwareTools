@@ -6,6 +6,7 @@ PATH = BASE_DIR / 'questions.json'
 
 
 def refresh_json(question: str, mail: str, name: str) -> None:
+    """Записывает данные в JSON файл в формате {почта: [имя, вопрос1, вопрос2...]}"""
     try:
         with open(PATH, encoding='utf-8') as file_in:
             data = json.load(file_in)
@@ -22,5 +23,6 @@ def refresh_json(question: str, mail: str, name: str) -> None:
 
 
 def write_json(data: dict | list) -> None:
+    """Записывает словарь или список в JSON файл пути PATH"""
     with open(PATH, 'w', encoding='utf-8') as file:
         json.dump(data, file, indent=4, ensure_ascii=False)
