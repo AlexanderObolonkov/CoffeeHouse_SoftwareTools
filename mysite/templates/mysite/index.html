@@ -3,30 +3,38 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Заголовок</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <title>Header</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
     <link rel="stylesheet" href="{% static '/css/styles.css' %}">
 </head>
 <body>
-    <h1>Все настроено</h1>
-    <img src="{% static 'img/logo_nav.png' %}" alt="лого Bottle">
-    <h3> Ask a Question </h3>
-    <form action="{% url 'index' %}" method="post">
-        {% csrf_token %}
-        <p>{{ form.question }}</p>
-        <p>{{ form.mail }}</p>
-        <p>{{ form.name }}</p>
-        <p><input type="submit" value="Send" class="btn btn-primary"></p>
-    </form>
-    <!-- {% if form.errors %}
-        {% for field in form %}
-            {% for error in field.errors %}
-                <div class="alert alert-danger">
-                    <strong>{{ error|escape }}</strong>
-                </div>
-            {% endfor %}
+<h1> Some template </h1>
+<img src="{% static 'img/logo_nav.png' %}" alt="лого Bottle">
+<h3> Ask a Question </h3>
+<form action="{% url 'index' %}" method="post">
+    {% csrf_token %}
+    <p>{{ form.question }}</p>
+    <p>{{ form.mail }}</p>
+    <p>{{ form.name }}</p>
+    <p><input type="submit" value="Send" class="btn btn-primary"></p>
+</form>
+{% if form.errors %}
+    {% for field in form %}
+        {% for error in field.errors %}
+            <div class="alert alert-danger">
+                <strong>{{ error|escape }}</strong>
+            </div>
         {% endfor %}
-    {% endif %} -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+    {% endfor %}
+    {% for error in form.non_field_errors %}
+        <div class="alert alert-danger">
+            <strong>{{ error|escape }}</strong>
+        </div>
+    {% endfor %}
+{% endif %}
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+        crossorigin="anonymous"></script>
 </body>
 </html>

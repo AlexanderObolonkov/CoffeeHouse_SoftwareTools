@@ -30,8 +30,8 @@ class MainView(View):
                 send_mail(f'From {name} | {mail}', question, mail, [getenv('MAIN_EMAIL')])
             except BadHeaderError:
                 return HttpResponse('Bad header')
-            questions = {mail: question}
-            pdb.set_trace()
+            questions = {mail: [name, question]}
+            # pdb.set_trace()
             return render(request, 'mysite/success.html', context={
                 'name': name,
                 'mail': mail,
