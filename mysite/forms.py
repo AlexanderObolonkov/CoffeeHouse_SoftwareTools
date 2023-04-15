@@ -1,5 +1,4 @@
 # import re
-
 from django import forms
 
 
@@ -29,7 +28,7 @@ class QuestionForm(forms.Form):
         })
     )
 
-    def clean_question(self) -> None:
+    def clean_question(self) -> str:
         """Метод для валидации поля question формы"""
         data = self.cleaned_data['question']
         if len(data) <= 3:
@@ -42,3 +41,4 @@ class QuestionForm(forms.Form):
                 'question',
                 'The text of the question should not consist of only digits.'
             )
+        return data
