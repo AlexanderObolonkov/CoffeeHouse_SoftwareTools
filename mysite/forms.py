@@ -30,7 +30,7 @@ class QuestionForm(forms.Form):
 
     def clean_question(self) -> str:
         """Метод для валидации поля question формы"""
-        data = self.cleaned_data['question']
+        data = self.cleaned_data['question'].strip()
         if len(data) <= 3:
             self.add_error(
                 'question',
