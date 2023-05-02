@@ -1,5 +1,4 @@
-import unittest
-
+from django.test import TestCase
 from django.core.exceptions import ValidationError
 from django.core.validators import validate_email
 
@@ -13,8 +12,10 @@ def is_email(email: str) -> bool:
     else:
         return True
 
-class EmailTestCase(unittest.TestCase):
+
+class EmailTestCase(TestCase):
     """Класс терстирования валидации email"""
+
     def test_false_mail(self):
         """Тестирует список неправильных адресов на неправильность"""
         list_mail_incorrect = ['', '1', 'm1@', '@mail', 'бу@домен.com',
@@ -25,7 +26,7 @@ class EmailTestCase(unittest.TestCase):
             self.assertFalse(is_email(email))
 
     def test_true_mail(self):
-        """Тестирует список неправильных адресов на неправильность"""
+        """Тестирует список адресов на правильность"""
         list_mail_correct = ['m.m@mail.ru', 'm1@gmail.com',
                              'disp.style.email.with+symbols@example.com',
                              'other.email-with-dash@axample.com',
@@ -36,7 +37,3 @@ class EmailTestCase(unittest.TestCase):
                              'an@7300744.ru']
         for email in list_mail_correct:
             self.assertTrue(is_email(email))
-
-
-if __name__ == '__main__':
-    unittest.main()
