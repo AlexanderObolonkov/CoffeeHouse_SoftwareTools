@@ -17,11 +17,14 @@ class EmailTestCase(TestCase):
     """Класс терстирования валидации email"""
 
     def test_false_mail(self):
-        """Тестирует список неправильных адресов на неправильность"""
+        """Тестирует список адресов на неправильность"""
         list_mail_incorrect = ['', '1', 'm1@', '@mail', 'бу@домен.com',
                                'xdd@mailru.', 'xddmail.ru', 'xdd@mailru',
                                'xd d@mail.ru', 'x@dd4@mail.ru',
-                               'xd..d@mail.ru', 'xd"d@mail.ru']
+                               'xd..d@mail.ru', 'xd"d@mail.ru',
+                               'sdsd@dfkjwdskvkdskfdkakfdldsdskdfdf'
+                               'dfdfdfddfkjwdskvkdskfdkakfdldsdskdfdfdfdfdfd.com',
+                               'dsdsa@f', 'hdsds@f.c']
         for email in list_mail_incorrect:
             self.assertFalse(is_email(email))
 
