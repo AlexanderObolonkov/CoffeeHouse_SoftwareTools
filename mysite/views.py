@@ -4,12 +4,14 @@ from .forms import FeedBackForm
 
 from django.shortcuts import render
 from django.views import View
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect, HttpRequest
 from django.core.mail import send_mail, BadHeaderError
 
 
 class MainView(View):
-    def get(self, request, *args, **kwargs):
+    """View главной страницы"""
+    def get(self, request: HttpRequest, *args, **kwargs) -> HttpResponse:
+        """GET-запрос для главной страницы"""
         positions = Position.objects.all()
         return render(
             request,
@@ -22,8 +24,9 @@ class MainView(View):
 
 
 class ContactsView(View):
-    """Кирилл"""
-    def get(self, request, *args, **kwargs):
+    """View страницы контактов"""
+    def get(self, request: HttpRequest, *args, **kwargs) -> HttpResponse:
+        """GET-запрос для станицы контактов"""
         form = FeedBackForm()
         return render(request, 'mysite/contacts.html', context={
             'nav_bar': 'contacts',
@@ -31,7 +34,8 @@ class ContactsView(View):
             'title': 'Написать мне'
         })
 
-    def post(self, request, *args, **kwargs):
+    def post(self, request: HttpRequest, *args, **kwargs) -> HttpResponse:
+        """POST-запрос для страницы контактов"""
         form = FeedBackForm(request.POST)
         if form.is_valid():
             name = form.cleaned_data['name']
@@ -49,7 +53,13 @@ class ContactsView(View):
 
 
 class SuccessView(View):
-    def get(self, request, *args, **kwargs):
+    """View страницы успеха"""
+    def get(self, request: HttpRequest, *args, **kwargs) -> HttpResponse:
+        """GET-запрос для страницы успеха"""
         return render(request, 'mysite/success.html', context={
             'title': 'Спасибо'
         })
+
+
+class BlogView(View):
+    ...
