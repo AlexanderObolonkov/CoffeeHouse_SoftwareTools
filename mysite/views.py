@@ -63,3 +63,8 @@ class SuccessView(View):
 
 class BlogView(View):
     ...
+
+class ActiveUsersView(View):
+    def get(self, request, *args, **kwargs):
+        return render(request, 'mysite/active_users.html', context={
+        })
