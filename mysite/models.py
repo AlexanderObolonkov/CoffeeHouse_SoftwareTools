@@ -2,7 +2,7 @@ from decimal import Decimal
 
 from django.db import models
 from django.core.validators import MinValueValidator
-
+from django.contrib.auth.models import AbstractUser
 
 class Position(models.Model):
     title: models.CharField = models.CharField(max_length=200)
@@ -15,3 +15,11 @@ class Position(models.Model):
 
     def __str__(self):
         return self.title
+
+class User(AbstractUser):
+    name = models.CharField(max_length=50)
+    email = models.EmailField()
+    password = models.CharField(max_length=50)
+    birth_date = models.DateField()
+    image = models.ImageField(upload_to='users_images', null=True, blank=True)
+

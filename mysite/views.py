@@ -1,6 +1,6 @@
 from os import getenv
 from .models import Position
-from .forms import FeedBackForm
+from .forms import FeedBackForm, RegistrationForm
 
 from django.shortcuts import render
 from django.views import View
@@ -66,5 +66,7 @@ class BlogView(View):
 
 class ActiveUsersView(View):
     def get(self, request, *args, **kwargs):
+        reg_form = RegistrationForm()
         return render(request, 'mysite/active_users.html', context={
+            'reg_form': reg_form
         })
