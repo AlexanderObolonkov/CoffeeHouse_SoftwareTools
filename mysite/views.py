@@ -1,11 +1,13 @@
 from os import getenv
-from .models import Position
-from .forms import FeedBackForm, RegistrationForm
 
-from django.shortcuts import render
+from .models import Position, Post
+from .forms import FeedBackForm, RegistrationForm, PostAddForm
+
+from django.shortcuts import render, get_object_or_404
 from django.views import View
 from django.http import HttpResponse, HttpResponseRedirect, HttpRequest
 from django.core.mail import send_mail, BadHeaderError
+from django.core.paginator import Paginator
 
 
 class MainView(View):
@@ -66,12 +68,37 @@ class SuccessView(View):
 
 
 class BlogView(View):
-    """View """
+    """View страницы полезных статей"""
 
     def get(self, request: HttpRequest, *args, **kwargs) -> HttpResponse:
-        """GET-запрос для страницы полезных статей"""
+        """GET-запрос для станицы полезных статей"""
+        posts = Post.objects.all().order_by('-id')
+        paginator = Paginator(posts, 6)
+        page_number = request.GET.get('page')
+        page_obj = paginator.get_page(page_number)
+
         return render(request, 'mysite/blog.html', context={
-            'navbar': 'blog'
+            'nav_bar': 'blog',
+            'page_obj': page_obj
+        })
+
+
+class PostDetailView(View):
+    """View страницы статьи"""
+
+    def get(self, request: HttpRequest, slug: str, *args, **kwargs) -> HttpResponse:
+        """GET-запрос для страницы статьи"""
+        post = get_object_or_404(Post, url=slug)
+        return render(request, 'mysite/post_detail.html', context={
+            'post': post
+        })
+
+
+class CreatePostView(View):
+    def get(self, request: HttpRequest, *args, **kwargs) -> HttpResponse:
+        form = PostAddForm()
+        return render(request, 'mysite/create_post.html', context={
+            'form': form
         })
 
 

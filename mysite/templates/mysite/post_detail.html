@@ -1,0 +1,22 @@
+{% extends './base.html' %}
+{% load static %}
+
+{% block title %}Блог COFFEE HOUSE{% endblock %}
+{% block page_content %}
+    <div class="main-content">
+        <section class="story-content">
+            <div class="container">
+                <h1>{{ post.title }}</h1>
+                <img src="{{ post.image.url }}" class="rounded mx-auto d-block" alt="Картинка поста">
+                <p>
+                    {{ post.content|safe }}
+                </p>
+                <div class="container">
+                    <h5>Автор: {{ post.author }}</h5>
+                    <h5>Опубликовано: {{ post.created_at }}</h5>
+                    <a class="nav-link" href="{% url 'blog' %}">Назад к статьям</a>
+                </div>
+            </div>
+        </section>
+    </div>
+{% endblock %}
