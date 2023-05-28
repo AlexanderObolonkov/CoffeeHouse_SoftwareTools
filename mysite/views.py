@@ -1,6 +1,6 @@
 from os import getenv
 from .models import Position
-from .forms import FeedBackForm
+from .forms import FeedBackForm, RegistrationForm
 
 from django.shortcuts import render
 from django.views import View
@@ -67,8 +67,17 @@ class SuccessView(View):
 
 class BlogView(View):
     """View """
+
     def get(self, request: HttpRequest, *args, **kwargs) -> HttpResponse:
         """GET-запрос для страницы полезных статей"""
         return render(request, 'mysite/blog.html', context={
             'navbar': 'blog'
+        })
+
+
+class ActiveUsersView(View):
+    def get(self, request, *args, **kwargs):
+        reg_form = RegistrationForm()
+        return render(request, 'mysite/active_users.html', context={
+            'reg_form': reg_form
         })
