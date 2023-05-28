@@ -7,7 +7,7 @@ __pycache__/
 venv/
 .mypy_cache/
 static/admin/
-static/ckeditor
+static/ckeditor/
 tips.md
 db.sqlite3
 .env
