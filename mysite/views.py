@@ -10,6 +10,7 @@ from django.core.mail import send_mail, BadHeaderError
 
 class MainView(View):
     """View главной страницы"""
+
     def get(self, request: HttpRequest, *args, **kwargs) -> HttpResponse:
         """GET-запрос для главной страницы"""
         positions = Position.objects.all()
@@ -25,6 +26,7 @@ class MainView(View):
 
 class ContactsView(View):
     """View страницы контактов"""
+
     def get(self, request: HttpRequest, *args, **kwargs) -> HttpResponse:
         """GET-запрос для станицы контактов"""
         form = FeedBackForm()
@@ -42,8 +44,9 @@ class ContactsView(View):
             from_email = form.cleaned_data['email']
             subject = form.cleaned_data['subject']
             message = form.cleaned_data['message']
+            mail = getenv('MAIN_EMAIL') or ''
             try:
-                send_mail(f'От {name} | {from_email} | {subject}', message, from_email, [getenv('MAIN_EMAIL')])
+                send_mail(f'От {name} | {from_email} | {subject}', message, from_email, [mail])
             except BadHeaderError:
                 return HttpResponse('Невалидный заголовок')
             return HttpResponseRedirect('success')
@@ -54,6 +57,7 @@ class ContactsView(View):
 
 class SuccessView(View):
     """View страницы успеха"""
+
     def get(self, request: HttpRequest, *args, **kwargs) -> HttpResponse:
         """GET-запрос для страницы успеха"""
         return render(request, 'mysite/success.html', context={
@@ -62,4 +66,9 @@ class SuccessView(View):
 
 
 class BlogView(View):
-    ...
+    """View """
+    def get(self, request: HttpRequest, *args, **kwargs) -> HttpResponse:
+        """GET-запрос для страницы полезных статей"""
+        return render(request, 'mysite/blog.html', context={
+            'navbar': 'blog'
+        })
