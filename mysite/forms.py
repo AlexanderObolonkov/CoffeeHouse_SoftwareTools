@@ -37,7 +37,8 @@ class FeedBackForm(forms.Form):
         })
     )
 
+
 class RegistrationForm(UserCreationForm):
     class Meta:
         model = User
-        fields = '__all__' 
+        fields = '__all__'

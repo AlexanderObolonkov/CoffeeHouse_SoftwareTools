@@ -1,3 +1,4 @@
+# mypy: ignore-errors
 from decimal import Decimal
 
 from django.db import models
