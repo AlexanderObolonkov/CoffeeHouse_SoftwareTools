@@ -7,7 +7,17 @@
         <section class="story-content">
             <div class="container">
                 <h1 class="text-uppercase text-center">Список статей</h1>
-                <a href="{% url 'create_post' %}">создать статью</a>
+                <h4 class="text-center"><a href="{% url 'create_post' %}">создать статью</a></h4><br>
+                {% if messages %}
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        {% for message in messages %}
+                            <strong>{{ message }}</strong>
+                        {% endfor %}
+                        <button type="button" class="close" data-bs-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                {% endif %}
                 <div class="row">
                     <div class="row">
                         {% for post in page_obj %}

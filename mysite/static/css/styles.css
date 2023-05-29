@@ -199,4 +199,8 @@ footer li a {
 .form-group {
     margin: 15px;
 }
+
+.django-ckeditor-widget{
+  width: 100%;
+}
 /* Post create page */

@@ -8,6 +8,8 @@ from django.views import View
 from django.http import HttpResponse, HttpResponseRedirect, HttpRequest
 from django.core.mail import send_mail, BadHeaderError
 from django.core.paginator import Paginator
+from django.contrib import messages
+from django.urls import reverse
 
 
 class MainView(View):
@@ -95,8 +97,43 @@ class PostDetailView(View):
 
 
 class CreatePostView(View):
+    """View страницы создания поста"""
+
     def get(self, request: HttpRequest, *args, **kwargs) -> HttpResponse:
+        """GET-запрос для создания поста"""
         form = PostAddForm()
+        return render(request, 'mysite/create_post.html', context={
+            'form': form
+        })
+
+    def post(self, request: HttpRequest, *args, **kwargs) -> HttpResponse:
+        """POST-запрос для создания поста"""
+        form = PostAddForm(request.POST, files=request.FILES)
+        print(request.FILES)
+        if form.is_valid():
+            title = form.cleaned_data['title']
+            url = form.cleaned_data['url']
+            description = form.cleaned_data['description']
+            content = form.cleaned_data['content']
+            image = form.cleaned_data['image']
+            created_at = form.cleaned_data['created_at']
+            author = form.cleaned_data['author']
+            post = Post(title=title, url=url, description=description,
+                        content=content, image=image, created_at=created_at,
+                        author=author)
+            post.save()
+            messages.success(request, 'Статья успешно добавлена')
+            return HttpResponseRedirect(reverse('blog'))
+        titles = {'title': 'Заголовок',
+                  'url': 'URL-адрес',
+                  'description': 'Описание',
+                  'content': 'Контент',
+                  'image': 'Изображения статьи',
+                  'created_at': 'Дата статьи'}
+        for old_title, new_title in titles.items():
+            if old_title in form.errors:
+                form.errors[new_title] = form.errors.pop(old_title)
+        print(form.errors.items())
         return render(request, 'mysite/create_post.html', context={
             'form': form
         })

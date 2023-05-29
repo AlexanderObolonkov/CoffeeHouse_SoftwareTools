@@ -4,9 +4,11 @@ from django import forms
 from ckeditor.widgets import CKEditorWidget
 
 from .models import User, Post
+from mysite.services import is_url_occupied
 
 
 class FeedBackForm(forms.Form):
+    """Класс формы обратной связи"""
     name = forms.CharField(
         max_length=100,
         widget=forms.TextInput(attrs={
@@ -48,14 +50,24 @@ class RegistrationForm(UserCreationForm):
 
 
 class PostAddForm(forms.Form):
+    """Класс формы добавления поста"""
+
     class Meta:
+        """Модель, с которой связана форма"""
         model = Post
-        fields = ('title', 'description', 'content', 'image', 'author')
+        fields = '__all__'
 
     title = forms.CharField(
         widget=forms.TextInput(attrs={
             'class': 'form-control',
             'placeholder': 'Укажите заголовок статьи'
+        })
+    )
+    url = forms.SlugField(
+        widget=forms.TextInput(attrs={
+            'class': 'form-control',
+            'placeholder': 'Укажите url адрес статьи (значение должно состоять только из латинских букв, цифр, '
+                           'знаков подчеркивания или дефиса.)'
         })
     )
     description = forms.CharField(
@@ -72,9 +84,23 @@ class PostAddForm(forms.Form):
             'class': 'form-control'
         })
     )
+    created_at = forms.DateField(
+        input_formats=['%d.%m.%Y'],
+        widget=forms.DateInput(attrs={
+            'class': 'form-control',
+            'placeholder': 'Введите дату в формате дд.мм.гг'
+        })
+    )
     author = forms.CharField(
         widget=forms.TextInput(attrs={
             'class': 'form-control',
             'placeholder': 'Укажите автора статьи'
         })
     )
+
+    def clean_url(self) -> str:
+        """Валидации url на уникальность"""
+        data = self.cleaned_data['url']
+        if is_url_occupied(data):
+            self.add_error('url', 'Данный url уже занят.')
+        return data

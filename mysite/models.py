@@ -9,6 +9,7 @@ from django.utils import timezone
 
 
 class Position(models.Model):
+    """Модель позиции меню"""
     title = models.CharField(max_length=200)
     url = models.SlugField()
     description = models.TextField()
@@ -30,8 +31,9 @@ class User(AbstractUser):
 
 
 class Post(models.Model):
+    """Модель статьи"""
     title = models.CharField(max_length=200)
-    url = models.SlugField()
+    url = models.SlugField(unique=True)
     description = models.TextField()
     content = RichTextUploadingField()
     image = models.ImageField()
