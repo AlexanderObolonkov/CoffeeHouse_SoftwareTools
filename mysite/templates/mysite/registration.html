@@ -1,0 +1,46 @@
+{% extends './base.html' %}
+{% load static %}
+
+{% block title %}Пользователи{% endblock %}
+
+{% block page_content %}
+<div class="main-content">
+        <section class="story-content">
+            <div class="container">
+                <h1 class="text-uppercase text-center">Регистрация</h1>
+            <form name="reg-form" method="post" action="{% url 'active_users' %}">
+                {% csrf_token %}
+                <div class="row">
+                        <div class="text-center md-form mb-3">
+                            <h2><label for="name" class="sr-only">Логин</label></h2>
+                            {{ reg_form.name }}
+                        </div>
+                        <div class="text-center md-form mb-3">
+                            <h2><label for="email" class="sr-only">Ваша почта</label></h2>
+                            {{ reg_form.email}}
+                        </div>
+                        <div class="text-center md-form mb-3">
+                            <h2><label for="subject" class="sr-only">Телефон</label></h2>
+                            {{ reg_form.phone}}
+                        </div>
+                        <div class="text-center md-form mb-0">
+                            <h2><label for="subject" class="sr-only">Дата рождения</label></h2>
+                            {{ reg_form.birth_date}}
+                        </div>
+                        <div class="text-center md-form mb-0">                      
+                            <div class="form-group">
+                                <h2><label for="reg_form.image">Аватарка</label></h2>
+                                    <div class="d-flex justify-content-center">
+                                        {{ reg_form.image }}
+                                    </div>
+                           </div>
+                        </div>
+                </div>
+                <div class="text-center text-md-left mt-3">
+                    <button class="btn btn-primary" type="submit"><strong>Отправить</strong></button>
+                </div>
+            </form>
+            </div>
+        </section>
+</div>
+{% endblock %}

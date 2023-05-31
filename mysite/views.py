@@ -141,7 +141,13 @@ class CreatePostView(View):
 
 class ActiveUsersView(View):
     def get(self, request, *args, **kwargs):
-        reg_form = RegistrationForm()
+        reg_form =  RegistrationForm()
         return render(request, 'mysite/active_users.html', context={
+        })
+
+class RegistrationView(View):
+    def get(self, request, *args, **kwargs):
+        reg_form = RegistrationForm()
+        return render(request, 'mysite/registration.html', context={
             'reg_form': reg_form
         })

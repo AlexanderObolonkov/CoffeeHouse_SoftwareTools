@@ -44,9 +44,33 @@ class FeedBackForm(forms.Form):
 
 
 class RegistrationForm(UserCreationForm):
+    image = forms.ImageField(
+            widget=forms.FileInput(attrs={
+                'class': 'form-control w-25',
+                }))
+    birth_date  = forms.DateField(
+        input_formats=['%d.%m.%Y'],
+        widget=forms.DateInput(attrs={
+            'placeholder': 'дд.мм.гг'
+            })
+        )
+    phone = forms.CharField(
+        widget=forms.TextInput(
+            attrs={
+                'placeholder': '8 (xxx) xxx-xx-xx'
+            }
+        )
+    )
     class Meta:
         model = User
         fields = '__all__'
+
+
+    def clean_url(self) -> str:
+        """Валидации url на уникальность"""
+        data = self.cleaned_data['url']
+        # Регулярка на телефон
+        return data
 
 
 class PostAddForm(forms.Form):

@@ -25,10 +25,9 @@ class Position(models.Model):
 class User(AbstractUser):
     name = models.CharField(max_length=50)
     email = models.EmailField()
-    password = models.CharField(max_length=50)
     birth_date = models.DateField(default=timezone.now)
+    phone = models.CharField(max_length=20, null=True)
     image = models.ImageField(upload_to='users_images', null=True, blank=True)
-
 
 class Post(models.Model):
     """Модель статьи"""

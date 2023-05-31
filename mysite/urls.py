@@ -1,7 +1,7 @@
 from django.urls import path
 
 from .views import (MainView, ContactsView, SuccessView, BlogView,
-                    ActiveUsersView, PostDetailView, CreatePostView)
+                    ActiveUsersView, PostDetailView, CreatePostView, RegistrationView)
 
 urlpatterns = [
     path('', MainView.as_view(), name='index'),
@@ -11,4 +11,5 @@ urlpatterns = [
     path('blog/<slug:slug>/', PostDetailView.as_view(), name='post_detail'),
     path('create_post/', CreatePostView.as_view(), name='create_post'),
     path('active_users/', ActiveUsersView.as_view(), name='active_users'),
+    path('registration/', RegistrationView.as_view(), name='registration'),
 ]
