@@ -170,4 +170,4 @@ EMAIL_HOST_USER = os.getenv('MAIN_EMAIL')
 EMAIL_HOST_PASSWORD = os.getenv('EMAIL_KEY')
 
 
-AUTH_USER_MODEL = 'mysite.User'
+#AUTH_USER_MODEL = 'mysite.User'

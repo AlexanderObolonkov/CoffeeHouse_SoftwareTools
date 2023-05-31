@@ -1,9 +1,8 @@
 # mypy: ignore-errors
-from django.contrib.auth.forms import UserCreationForm
 from django import forms
 from ckeditor.widgets import CKEditorWidget
 
-from .models import User, Post
+from .models import CoffeeUser, Post
 from mysite.services import is_url_occupied
 
 
@@ -43,8 +42,15 @@ class FeedBackForm(forms.Form):
     )
 
 
-class RegistrationForm(UserCreationForm):
+class RegistrationForm(forms.Form):
+    name = forms.CharField(widget=forms.TextInput(
+        attrs={
+            'placeholder': 'user123'
+            }))
+
+    email = forms.EmailField()
     image = forms.ImageField(
+            required=False,
             widget=forms.FileInput(attrs={
                 'class': 'form-control w-25',
                 }))
@@ -57,13 +63,20 @@ class RegistrationForm(UserCreationForm):
     phone = forms.CharField(
         widget=forms.TextInput(
             attrs={
-                'placeholder': '8 (xxx) xxx-xx-xx'
+            'placeholder': '8 (xxx) xxx-xx-xx'
             }
         )
     )
+
+    def save(self):
+        # d - сокращение от data. Нужно, чтобы было меньше писать
+        d = self.cleaned_data
+        print(d)
+        user = CoffeeUser(name=d['name'], email=d['email'], birth_date=d['birth_date'], phone=d['phone'], image=d['image'])
+        user.save()
     class Meta:
-        model = User
-        fields = '__all__'
+        model = CoffeeUser
+        fields = ['name', 'email', 'birth_date', 'phone', 'image']
 
 
     def clean_url(self) -> str:

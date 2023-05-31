@@ -8,9 +8,18 @@
         <section class="story-content">
             <div class="container">
                 <h1 class="text-uppercase text-center">Регистрация</h1>
-            <form name="reg-form" method="post" action="{% url 'active_users' %}">
-                {% csrf_token %}
-                <div class="row">
+                {% if reg_form.errors %}
+                        <div class="alert alert-warning alert-dismissible fade show" role="alert"
+                             style="margin-top: 50px;">
+                            {{ reg_form.errors }}
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                {% endif %}
+                <form name="reg-form" method="post" action="{% url 'registration' %}">
+                    {% csrf_token %}
+                    <div class="row">
                         <div class="text-center md-form mb-3">
                             <h2><label for="name" class="sr-only">Логин</label></h2>
                             {{ reg_form.name }}
@@ -35,10 +44,10 @@
                                     </div>
                            </div>
                         </div>
-                </div>
-                <div class="text-center text-md-left mt-3">
-                    <button class="btn btn-primary" type="submit"><strong>Отправить</strong></button>
-                </div>
+                  </div>
+                  <div class="text-center text-md-left mt-3">
+                      <button class="btn btn-primary" type="submit"><strong>Отправить</strong></button>
+                 </div>
             </form>
             </div>
         </section>

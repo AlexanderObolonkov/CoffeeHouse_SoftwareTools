@@ -3,7 +3,7 @@ from os import getenv
 from .models import Position, Post
 from .forms import FeedBackForm, RegistrationForm, PostAddForm
 
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.views import View
 from django.http import HttpResponse, HttpResponseRedirect, HttpRequest
 from django.core.mail import send_mail, BadHeaderError
@@ -146,8 +146,19 @@ class ActiveUsersView(View):
         })
 
 class RegistrationView(View):
+    reg_form = RegistrationForm()
     def get(self, request, *args, **kwargs):
-        reg_form = RegistrationForm()
+        form = RegistrationForm()
         return render(request, 'mysite/registration.html', context={
-            'reg_form': reg_form
+            'nav_bar':"registration",
+            'reg_form': form
+        })
+    def post(self, request):
+        form = RegistrationForm(data=request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect("/active_users")
+        return render(request, 'mysite/registration.html', context={
+            'nav_bar':"registration",
+            'reg_form': form
         })

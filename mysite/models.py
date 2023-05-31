@@ -22,11 +22,11 @@ class Position(models.Model):
         return self.title
 
 
-class User(AbstractUser):
+class CoffeeUser(models.Model):
     name = models.CharField(max_length=50)
     email = models.EmailField()
     birth_date = models.DateField(default=timezone.now)
-    phone = models.CharField(max_length=20, null=True)
+    phone = models.CharField(max_length=20)
     image = models.ImageField(upload_to='users_images', null=True, blank=True)
 
 class Post(models.Model):
