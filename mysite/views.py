@@ -1,10 +1,11 @@
 from os import getenv
 
-from .models import Position, Post
+from .models import Position, Post, CoffeeUser
 from .forms import FeedBackForm, RegistrationForm, PostAddForm
 
 from django.shortcuts import render, get_object_or_404, redirect
 from django.views import View
+from django.views.generic import ListView
 from django.http import HttpResponse, HttpResponseRedirect, HttpRequest
 from django.core.mail import send_mail, BadHeaderError
 from django.core.paginator import Paginator
@@ -139,11 +140,10 @@ class CreatePostView(View):
         })
 
 
-class ActiveUsersView(View):
-    def get(self, request, *args, **kwargs):
-        reg_form =  RegistrationForm()
-        return render(request, 'mysite/active_users.html', context={
-        })
+class ActiveUsersView(ListView):
+    model = CoffeeUser
+    template_name = "mysite/active_users.html"
+    paginate_by = 5
 
 class RegistrationView(View):
     reg_form = RegistrationForm()
