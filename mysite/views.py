@@ -143,7 +143,7 @@ class CreatePostView(View):
 class ActiveUsersView(ListView):
     model = CoffeeUser
     template_name = "mysite/active_users.html"
-    paginate_by = 5
+    #paginate_by = 5
 
 class RegistrationView(View):
     reg_form = RegistrationForm()
@@ -154,8 +154,13 @@ class RegistrationView(View):
             'reg_form': form
         })
     def post(self, request):
-        form = RegistrationForm(data=request.POST)
+        form = RegistrationForm(data=request.POST, files=request.FILES)
         if form.is_valid():
+            name = form.cleaned_data['name']
+            email = form.cleaned_data['email']
+            birth_date = form.cleaned_data['birth_date']
+            phone = form.cleaned_data['phone']
+            image = form.cleaned_data['image']
             form.save()
             return redirect("/active_users")
         return render(request, 'mysite/registration.html', context={

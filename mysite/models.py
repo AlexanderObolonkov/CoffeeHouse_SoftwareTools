@@ -27,7 +27,7 @@ class CoffeeUser(models.Model):
     email = models.EmailField()
     birth_date = models.DateField(default=timezone.now)
     phone = models.CharField(max_length=20)
-    image = models.ImageField(upload_to='users_images', null=True, blank=True)
+    image = models.ImageField()
 
 class Post(models.Model):
     """Модель статьи"""
