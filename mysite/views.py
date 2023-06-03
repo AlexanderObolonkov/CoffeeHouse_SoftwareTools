@@ -143,7 +143,7 @@ class CreatePostView(View):
 class ActiveUsersView(ListView):
     model = CoffeeUser
     template_name = "mysite/active_users.html"
-    #paginate_by = 5
+    paginate_by = 5
 
 class RegistrationView(View):
     reg_form = RegistrationForm()

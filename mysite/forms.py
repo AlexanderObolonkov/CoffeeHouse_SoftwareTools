@@ -3,8 +3,7 @@ from django import forms
 from ckeditor.widgets import CKEditorWidget
 
 from .models import CoffeeUser, Post
-from mysite.services import is_url_occupied
-
+from mysite.services import is_url_occupied, is_login_valid, match_mail, match_phone, check_date
 
 class FeedBackForm(forms.Form):
     """Класс формы обратной связи"""
@@ -79,10 +78,31 @@ class RegistrationForm(forms.Form):
         fields = ['name', 'email', 'birth_date', 'phone', 'image']
 
 
-    def clean_url(self) -> str:
-        """Валидации url на уникальность"""
-        data = self.cleaned_data['url']
-        # Регулярка на телефон
+    def clean_name(self):
+        """Валидация логина на длину"""
+        data = self.cleaned_data['name']
+        print(data)
+        if not is_login_valid(data):
+            self.add_error('name', 'Данный логин слишком короткий')
+        return data
+
+    def clean_email(self):
+        """Валидация почты"""
+        data = self.cleaned_data['email']
+        if not match_mail(data):
+            self.add_error('email', 'Некорректный почтовый адрес')
+        return data
+
+    def clean_phone(self):
+        data = self.cleaned_data['phone']
+        if not match_phone(data):
+            self.add_error('phone', "Некорректный телефонный номер")
+        return data
+
+    def clean_birth_date(self):
+        data = self.cleaned_data['birth_date']
+        if not check_date(data):
+            self.add_error('birth_date', "Дата рождения не может быть больше, чем текущая")
         return data
 
 

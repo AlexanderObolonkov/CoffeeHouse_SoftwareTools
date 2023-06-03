@@ -19,6 +19,10 @@ img {
 .avatar {
     border-radius: 50% 50%;
 }
+.list {
+    list-style-type: decimal;
+    margin-left: 50px;
+}
 section {
     padding: 50px 0;
 }

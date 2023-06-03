@@ -3,7 +3,7 @@ from datetime import datetime
 from django.test import TestCase
 from django.core.exceptions import ValidationError
 from django.core.validators import validate_slug
-
+from mysite.services import is_url_occupied, is_login_valid, match_mail, match_phone, check_date
 
 class URLTestCase(TestCase):
     """Тестовый случай URL"""
@@ -55,3 +55,29 @@ class CreatedDateTestCase(TestCase):
         list_correct_date = ['10.02.2004', '01.01.1991', '29.02.2004']
         for date_ in list_correct_date:
             self.assertTrue(CreatedDateTestCase.is_correct_date(date_))
+
+
+class EmailTestCase(TestCase):
+    def test_match_mail_true(self):
+        emails = ["gajkin.kirill@yandex.ru", "kirill.new@gmail.com", "yuriy@mail.com", "sasha@gmail.com", "alexandra.haskova@yandex.ru",
+                  "kirill.gaykin@gmail.com", "ricardrajonhart@gmail.com", "vovapupkin@mail.com", "genius877@yandex.ru", "vasilievskiy.central@yandex.ru"];
+        for i in emails:
+            self.assertTrue(match_mail(i), f"{i} mail is not valid")
+
+    def test_match_mail_false(self):
+        emails = ["1", "kirill", "@", "@gmail", "kiriLL@gmail", "kirill.gmail.com", "kirill.ru", "kirill@.ru",
+                  "kirill@gmailcom", "kirill@gmail.r", "kirill@gmail.comma", "123456789"];
+        for i in emails:
+            self.assertFalse(match_mail(i), f"{i} mail is valid")
+
+
+class PhoneTestCase(TestCase):
+    def test_match_phone_true(self):
+        phones = ['89118445162', '+79118445162', '+7(911) 844 51-62', '8445162', '844-51-62', '84451-62', '844-5162']
+        for i in phones:
+            self.assertTrue(match_phone(i), f"phone is not valid")
+
+    def test_match_phone_false(self):
+        phones = ['8', '---', '12345', '321', '+7', '+7888888888888888']
+        for i in phones:
+            self.assertFalse(match_phone(i), f"phone is valid")
