@@ -1,7 +1,7 @@
 from django.urls import path
 
 from .views import (MainView, ContactsView, SuccessView, BlogView,
-                    ActiveUsersView, PostDetailView, CreatePostView, RegistrationView)
+                    ActiveUsersView, PostDetailView, CreatePostView, RegistrationView,PartnersView)
 
 urlpatterns = [
     path('', MainView.as_view(), name='index'),
@@ -12,4 +12,5 @@ urlpatterns = [
     path('create_post/', CreatePostView.as_view(), name='create_post'),
     path('active_users/', ActiveUsersView.as_view(), name='active_users'),
     path('registration/', RegistrationView.as_view(), name='registration'),
+    path('partners/',PartnersView.as_view(),name='partners')
 ]

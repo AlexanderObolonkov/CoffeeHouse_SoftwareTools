@@ -167,3 +167,7 @@ class RegistrationView(View):
             'nav_bar':"registration",
             'reg_form': form
         })
+
+class PartnersView(View):
+    def get(self, request, *args, **kwargs):
+        return render(request, 'mysite/partners.html')
