@@ -3,7 +3,7 @@ from django import forms
 from ckeditor.widgets import CKEditorWidget
 
 from .models import CoffeeUser, Post,Partner
-from mysite.services import is_url_occupied, is_login_valid, match_mail, match_phone, check_date
+from mysite.services import is_url_occupied, is_login_valid, match_mail, match_phone, check_date,is_name_valid
 
 class FeedBackForm(forms.Form):
     """Класс формы обратной связи"""
@@ -189,8 +189,8 @@ class PartnerForm(forms.Form):
     def clean_name(self):
         """Валидация названия компании"""
         data = self.cleaned_data['name']
-        if not is_login_valid(data):
-            self.add_error('name', 'Введите имя компании')
+        if not is_name_valid(data):
+            self.add_error('name', 'Введите корректное имя компании')
         return data
 
     def clean_email(self):

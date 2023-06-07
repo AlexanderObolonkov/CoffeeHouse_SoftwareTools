@@ -3,7 +3,7 @@ from datetime import datetime
 from django.test import TestCase
 from django.core.exceptions import ValidationError
 from django.core.validators import validate_slug
-from mysite.services import is_url_occupied, is_login_valid, match_mail, match_phone, check_date
+from mysite.services import is_url_occupied, is_login_valid, match_mail, match_phone, check_date,is_name_valid
 
 class URLTestCase(TestCase):
     """Тестовый случай URL"""
@@ -81,3 +81,28 @@ class PhoneTestCase(TestCase):
         phones = ['8', '---', '12345', '321', '+7', '+7888888888888888']
         for i in phones:
             self.assertFalse(match_phone(i), f"phone is valid")
+class NameTestCase(TestCase):
+    """Проверка имени компании"""
+    def test_name_true(self):
+        """Проверка позитивных случаев"""
+        names=["company","1_compane","i","random_company"]
+        for name in names:
+            self.assertTrue(is_name_valid(name))
+    def test_name_false(self):
+        """Проверка негативных случаев"""
+        names=["","123","15434334589"]
+        for name in names:
+            self.assertFalse(is_name_valid(name))
+
+class PartnerEmailTestCase(TestCase):
+    """Проверка email партнеров"""
+    def test_email_true(self):
+        """Проверка позитивных случаев"""
+        emails=["coompany@email.com","company_with_1_digit@yandex.ru","company.dotted.email@gmail.com"]
+        for email in emails:
+            self.assertTrue(match_mail(email))
+    def test_email_false(self):
+        """Проверка негативных случаев"""
+        emails=["1423","company","compane@","company@mail","compane@mailru","company.mail.ru","company@company@mail.ru"]
+        for email in emails:
+            self.assertFalse(match_mail(email))

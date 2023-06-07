@@ -31,3 +31,9 @@ def check_date(date):
         return False
     else:
         return True
+
+def is_name_valid(name:str):
+    if len(name)>0 and not(name.isdigit()):
+        return True
+    else:
+        return False
