@@ -167,7 +167,12 @@ class PartnerForm(forms.Form):
         attrs={
             'placeholder': 'Название компании'
             }))
-    email = forms.EmailField()
+    email = forms.CharField(
+        max_length=100,
+        widget=forms.EmailInput(attrs={
+            'placeholder': "Ваша почта"
+        })
+    )
     phone = forms.CharField(
         widget=forms.TextInput(
             attrs={
@@ -182,7 +187,7 @@ class PartnerForm(forms.Form):
         })
     )
     def clean_name(self):
-        """Валидация логина на длину"""
+        """Валидация названия компании"""
         data = self.cleaned_data['name']
         if not is_login_valid(data):
             self.add_error('name', 'Введите имя компании')

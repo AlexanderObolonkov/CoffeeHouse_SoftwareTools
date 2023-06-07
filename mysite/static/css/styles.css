@@ -209,4 +209,11 @@ footer li a {
 .django-ckeditor-widget{
   width: 100%;
 }
+.alert {
+    color: red
+}
+.form-group input {
+    width: 450px;
+    height: 25px
+}
 /* Post create page */

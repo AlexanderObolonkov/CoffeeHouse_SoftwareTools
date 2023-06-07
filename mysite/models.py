@@ -45,7 +45,6 @@ class Post(models.Model):
 class Partner(models.Model):
     """Модель партнерской компании"""
     name=models.CharField(max_length=150)
-    application_date=models.DateTimeField(default=timezone.now)
     email=models.EmailField()
     phone = models.CharField(max_length=20)
     description=models.TextField()

@@ -1,6 +1,6 @@
 from os import getenv
 
-from .models import Position, Post, CoffeeUser
+from .models import Position, Post, CoffeeUser,Partner
 from .forms import FeedBackForm, RegistrationForm, PostAddForm,PartnerForm
 
 from django.shortcuts import render, get_object_or_404, redirect
@@ -171,7 +171,25 @@ class RegistrationView(View):
 class PartnersView(View):
     def get(self, request, *args, **kwargs):
         form=PartnerForm()
+        partners=Partner.objects.all()
         return render(request, 'mysite/partners.html',
                       context={
-            'form': form
+            'form': form,
+            'partners':partners
+        })
+    def post(self,request):
+        form=PartnerForm(data=request.POST)
+        if form.is_valid():
+            name=form.cleaned_data['name']
+            email=form.cleaned_data['email']
+            phone=form.cleaned_data['phone']
+            description=form.cleaned_data['description']
+            partner=Partner(name=name,email=email,phone=phone,description=description)
+            partner.save()
+            return redirect("/partners")
+        partners=Partner.objects.all()
+        return render(request, 'mysite/partners.html',
+                      context={
+            'form': form,
+            'partners':partners
         })
