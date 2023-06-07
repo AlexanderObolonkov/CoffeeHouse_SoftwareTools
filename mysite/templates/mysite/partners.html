@@ -62,6 +62,21 @@
                     </tr>
                 </table>
                 <h4 class="text-uppercase text-center">Оставить заявку</h4>
+                <form class="form-group" method="post" action="{% url 'partners' %}" novalidate>
+                    {% csrf_token %}
+                    <table>
+                        {%for field in form%}
+                        <div>
+                            <p>{{field.label_tag}}</p>
+                            <div>{{field}}</div>
+                            {%for error in field.errors%}
+                                <p class="alert">{{error}}</p>
+                            {%endfor%}
+                        </div>
+                        {%endfor%}
+                    </table>
+                    <input type="submit" value="Send">
+                </form>
             </div>
         </section>
     </div>

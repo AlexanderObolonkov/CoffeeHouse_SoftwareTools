@@ -2,7 +2,7 @@
 from django import forms
 from ckeditor.widgets import CKEditorWidget
 
-from .models import CoffeeUser, Post
+from .models import CoffeeUser, Post,Partner
 from mysite.services import is_url_occupied, is_login_valid, match_mail, match_phone, check_date
 
 class FeedBackForm(forms.Form):
@@ -161,3 +161,45 @@ class PostAddForm(forms.Form):
         if is_url_occupied(data):
             self.add_error('url', 'Данный url уже занят.')
         return data
+
+class PartnerForm(forms.Form):
+    name = forms.CharField(widget=forms.TextInput(
+        attrs={
+            'placeholder': 'Название компании'
+            }))
+    email = forms.EmailField()
+    phone = forms.CharField(
+        widget=forms.TextInput(
+            attrs={
+            'placeholder': '8 (xxx) xxx-xx-xx'
+            }
+        )
+    )
+    description = forms.CharField(
+        widget=forms.Textarea(attrs={
+            'class': 'form-control',
+            'placeholder': 'Напишите что-нибудь о вас'
+        })
+    )
+    def clean_name(self):
+        """Валидация логина на длину"""
+        data = self.cleaned_data['name']
+        if not is_login_valid(data):
+            self.add_error('name', 'Введите имя компании')
+        return data
+
+    def clean_email(self):
+        """Валидация почты"""
+        data = self.cleaned_data['email']
+        if not match_mail(data):
+            self.add_error('email', 'Некорректный почтовый адрес')
+        return data
+
+    def clean_phone(self):
+        data = self.cleaned_data['phone']
+        if not match_phone(data):
+            self.add_error('phone', "Некорректный телефонный номер")
+        return data
+    class Meta:
+        model = Partner
+        fields = '__all__'
